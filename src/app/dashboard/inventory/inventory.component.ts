@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ApiservicesService } from 'src/app/services/apiservices.service';
+import { ApiService } from 'src/app/services/api.service';
 
-export interface InventoryElement {
-  CATEGORY: string;
-  ID: number;
-  COLOR: string;
-  NAME: string;
-  INSTOCK: number;
-}
+
+// export interface InventoryElement {
+//   CATEGORY: string;
+//   ID: number;
+//   COLOR: string;
+//   NAME: string;
+//   INSTOCK: number;
+// }
 // const ELEMENT_DATA: InventoryElement[] = [
 //   { ID: 1, CATEGORY: 'Ring', COLOR: 'Silver', NAME: 'Renosa ring', INSTOCK: 2 },
 //   { ID: 2, CATEGORY: 'Ring', COLOR: 'Silver', NAME: 'Renosa ring', INSTOCK: 200 },
@@ -29,7 +30,7 @@ export interface InventoryElement {
   styleUrls: ['./inventory.component.scss']
 })
 export class InventoryComponent implements OnInit {
-  displayedColumns: String[] = ['ID', 'CATEGORY', 'COLOR', 'NAME', 'INSTOCK'];
+  // displayedColumns: String[] = ['ID', 'CATEGORY', 'COLOR', 'NAME', 'INSTOCK'];
   // dataSource = ELEMENT_DATA;
 
   // category: string[] = [
@@ -63,16 +64,17 @@ export class InventoryComponent implements OnInit {
   //   "10"
   // ];
   productList: any;
-  constructor(private api:ApiservicesService) {
+  constructor(private api:ApiService) {
 
   }
 
   ngOnInit(): void {
     this.api.getProductData().subscribe(async data=>{
-  console.log("data",data); // get product data result
-  this.productList=data
-  await this.getTableData()
-})
+     console.log("data",data); // get product data result
+    this.productList=data
+    await this.getTableData()
+    })
+
 
   }
   getTableData(){
